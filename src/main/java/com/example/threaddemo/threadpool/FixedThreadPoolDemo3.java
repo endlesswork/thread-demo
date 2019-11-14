@@ -3,6 +3,7 @@ package com.example.threaddemo.threadpool;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.Executors;
+import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
@@ -14,7 +15,9 @@ import java.util.concurrent.TimeUnit;
  */
 public class FixedThreadPoolDemo3 {
 
-    static ThreadPoolExecutor threadPoolExecutor = (ThreadPoolExecutor) Executors.newFixedThreadPool(5);
+    static ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(5, 5,
+            0L, TimeUnit.MILLISECONDS,
+            new LinkedBlockingQueue<Runnable>());
 
     static class ThreadDemo implements Runnable{
 

@@ -3,6 +3,7 @@ package com.example.threaddemo.threadpool;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.Executors;
+import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
@@ -36,7 +37,9 @@ public class FixedThreadPoolDemo {
     }
 
     public static void main(String []args) throws InterruptedException {
-        ThreadPoolExecutor threadPoolExecutor = (ThreadPoolExecutor) Executors.newFixedThreadPool(5);
+        ThreadPoolExecutor threadPoolExecutor =  new ThreadPoolExecutor(5, 5,
+                0L, TimeUnit.MILLISECONDS,
+                new LinkedBlockingQueue<Runnable>());
         for (int i=0;i<20;i++){
             threadPoolExecutor.execute(new ThreadDemo("task-"+i));
         }
